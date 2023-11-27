@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.jokes;
+package com.nighthawk.spring_portfolio.mvc.price;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

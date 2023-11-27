@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.jokes;
+package com.nighthawk.spring_portfolio.mvc.price;
 
 import java.util.List;
 

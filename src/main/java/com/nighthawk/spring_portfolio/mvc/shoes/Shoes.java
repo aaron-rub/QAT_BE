@@ -26,9 +26,6 @@ public class Shoes {
     // starting shoes
     public static String[] init() {
         final String[] shoesArray = {
-            "Nike",
-            "Adidas",
-            "Crocs"
         };
         return shoesArray;
     }

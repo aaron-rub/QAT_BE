@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sneakers API</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="sortByName()">Sort by Name</button>
+    <button onclick="sortByPrice()">Sort by Price</button>
+
+    <table id="sneakersTable">
+        <!-- Table data goes here -->
+    </table>
+
+    <script>
+        var data;
+
+        function fetchData(sort) {
+            fetch('/sneakers?sort=' + sort)
+                .then(response => response.json())
+                .then(json => {
+                    data = json;
+                    displayData();
+                });
+        }
+
+        function sortByName() {
+            fetchData('name');
+        }
+
+        function sortByPrice() {
+            fetchData('price');
+        }
+
+        function displayData() {
+            var table = document.getElementById("sneakersTable");
+            table.innerHTML = "";  // Clear the table
+
+            // Add new rows to the table
+            data.forEach(sneaker => {
+                var row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = sneaker.name;
+                cell2.innerHTML = sneaker.retail_price_cents / 100;  // Convert to dollars
+            });
+        }
+
+        // Fetch and display the data initially
+        fetchData();
+    </script>
+</body>
+</html>

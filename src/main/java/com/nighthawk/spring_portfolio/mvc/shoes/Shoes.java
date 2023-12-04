@@ -21,8 +21,8 @@ public class Shoes {
     private String name;
 
     private int price;
+、
     private LocalDate date;
-
     // starting shoes
     public static String[] init() {
         final String[] shoesArray = {

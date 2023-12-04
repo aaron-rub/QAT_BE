@@ -30,7 +30,7 @@ public class ShoesApiController {
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
     @Getmapping("/name")
-    public ResponseEntity<Jokes> setLike(@PathVariable long id) {
+    public ResponseEntity<Jokes> getName(@PathVariable long id) {
         /* 
         * Optional (below) is a container object which helps determine if a result is present. 
         * If a value is present, isPresent() will return true
@@ -50,18 +50,19 @@ public class ShoesApiController {
         return names;
     }
 
-    /* Update Jeer
-     */
-    @PostMapping("/jeer/{id}")
-    public ResponseEntity<Jokes> setJeer(@PathVariable long id) {
-        Optional<Jokes> optional = repository.findById(id);
-        if (optional.isPresent()) {  // Good ID
-            Jokes joke = optional.get();
-            joke.setBoohoo(joke.getBoohoo()+1);
-            repository.save(joke);
-            return new ResponseEntity<>(joke, HttpStatus.OK);
-        }
-        // Bad ID
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    @GetMapping("/price")
+    public ResponseEntity<Jokes> getName(@PathVariable long id) {
+        Shoes price = repository.findAll()
+        int i, key, j;
+        for (i = 1; i < n; i++) {
+            key = names[i];
+            j = i - 1;
+    
+            while (j >= 0 && names[j].name > key.name) {
+                names[j + 1] = names[j];
+                j = j - 1;
+            }
+            names[j + 1] = key;
+        return names;
     }
 }

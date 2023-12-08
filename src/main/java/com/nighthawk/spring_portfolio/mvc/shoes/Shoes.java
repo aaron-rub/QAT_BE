@@ -7,7 +7,14 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException; 
 @Data  // Annotations to simplify writing code (ie constructors, setters)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,9 +31,12 @@ public class Shoes {
 、
     private LocalDate date;
     // starting shoes
+    JSONParser jsonParser = new JSONParser();
+
     public static String[] init() {
-        final String[] shoesArray = {
-        };
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("/api.json"));/
+        final String[] shoesArray = {};
+        
         return shoesArray;
     }
 }

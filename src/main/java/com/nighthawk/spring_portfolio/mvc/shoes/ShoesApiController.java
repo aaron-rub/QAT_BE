@@ -43,7 +43,7 @@ public class ShoesApiController {
             key = names[i];
             j = i - 1;
     
-            while (j >= 0 && names[j].name > key.name) {
+            while (j >= 0 && names[j].name.compareTo(key.name)>0) {
                 names[j + 1] = names[j];
                 j = j - 1;
             }

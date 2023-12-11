@@ -25,50 +25,53 @@ public class ShoesApiController {
         return new ResponseEntity<>( repository.findAll(), HttpStatus.OK);
     }
 
-    /* Update Like
-     * @PutMapping annotation is used for mapping HTTP PUT requests onto specific handler methods.
-     * @PathVariable annotation extracts the templated part {id}, from the URI
-     */
-    @Getmapping("/name")
-    public ResponseEntity<Jokes> getName(@PathVariable long id) {
+    @Getmapping("/insert")
+    public ResponseEntity<Shoes> getName(@PathVariable long id) {
         /* 
         * Optional (below) is a container object which helps determine if a result is present. 
         * If a value is present, isPresent() will return true
         * get() will return the value.
         */
-        Shoes names = repository.findAll()
+        List<Shoes> shoes = repository.findAll()
         int i, j;
         Shoes key;
-        for (i = 1; i < n; i++) {
-            key = names[i];
+        ArrayList<List<Shoes> > progress = new ArrayList<List<Shoes> >;
+        progress.add(shoes.clone());
+        for (i = 1; i < shoes.size(); i++) {
+            key = shoes.get(i);
             j = i - 1;
     
-            while (j >= 0 && names[j].name.compareTo(key.name)>0) {
-                names[j + 1] = names[j];
+            while (j >= 0 && shoes.get(j).name.compareTo(key.name)>0) {
+                shoes.set(j + 1,shoes.get(j));
                 j = j - 1;
             }
-            names[j + 1] = key;
-        return names;
+            shoes.set(j + 1, key);
+            progress.add(shoes.clone());
+        return ResponseEntity<>(progress, HttpStatus.OK);
     }
 
-    @GetMapping("/price")
-    public ResponseEntity<Jokes> getName(@PathVariable long id) {
-        Shoes price = repository.findAll()
+    @GetMapping("/bubble")
+    public ResponseEntity<Shoes> getName(@PathVariable long id) {
+        List<Shoes> shoes = repository.findAll()
         int i, j;
         Shoes temp;
         boolean swapped;
-        for (i = 0; i < n - 1; i++) {
+        ArrayList<List<Shoes> > progress = new ArrayList<List<Shoes> >;
+        progress.add(shoes.clone());
+        for (i = 0; i < shoes.size() - 1; i++) {
             swapped = false;
-            for (j = 0; j < n - i - 1; j++) {
-                if (price[j].price > price[j + 1].price) {
-                    temp = price[j];
-                    price[j] = price[j + 1];
-                    price[j + 1] = temp;
+            for (j = 0; j < shoes.size() - i - 1; j++) {
+                if (shoes.get(j).name.compareTo(temp.name)>0) {
+                    temp = shoes.get(j);
+                    shoes.set(j,shoes.get(j + 1));
+                    shoes.set(j + 1, temp);
                     swapped = true;
                 }
             }
+            progress.add(shoes.clone());
             if (swapped == false)
                 break;
         }
+        return ResponseEntity<>(progress, HttpStatus.OK);;
     }
 }

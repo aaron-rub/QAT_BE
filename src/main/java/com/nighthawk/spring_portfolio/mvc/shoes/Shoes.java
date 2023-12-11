@@ -34,9 +34,13 @@ public class Shoes {
     JSONParser jsonParser = new JSONParser();
 
     public static String[] init() {
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("/api.json"));/
-        final String[] shoesArray = {};
-        
-        return shoesArray;
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("/api.json"));
+        JSONArray shoesJson = jsonObject.getJSONArray("sneakers");
+        String[] shoesArray = new String[shoesJson.size()];
+        for (int i=0;i<shoesJson.size();i++){
+            shoesArray[i]=shoesJson.getJsonObject(i).getJsonString("name");
+        }
+        final String[] finalArray=shoesArray.clone();
+        return finalArray;
     }
 }

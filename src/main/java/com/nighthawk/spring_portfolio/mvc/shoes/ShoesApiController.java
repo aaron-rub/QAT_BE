@@ -72,6 +72,46 @@ public class ShoesApiController {
             if (swapped == false)
                 break;
         }
-        return ResponseEntity<>(progress, HttpStatus.OK);;
+        return ResponseEntity<>(progress, HttpStatus.OK);
+    }
+
+    @GetMapping("/bubble")
+    public ResponseEntity<Shoes> getName(@PathVariable long id) {
+        List<Shoes> shoes = repository.findAll()
+        int i, j;
+        Shoes temp;
+        boolean swapped;
+        ArrayList<List<Shoes> > progress = new ArrayList<List<Shoes> >;
+        progress.add(shoes.clone());
+        for (i = 0; i < shoes.size() - 1; i++) {
+            swapped = false;
+            for (j = 0; j < shoes.size() - i - 1; j++) {
+                if (shoes.get(j).name.compareTo(temp.name)>0) {
+                    temp = shoes.get(j);
+                    shoes.set(j,shoes.get(j + 1));
+                    shoes.set(j + 1, temp);
+                    swapped = true;
+                }
+            }
+            progress.add(shoes.clone());
+            if (swapped == false)
+                break;
+        }
+        return ResponseEntity<>(progress, HttpStatus.OK);
+
+    @GetMapping("/fib/{a}/{b}")
+    public ResponseEntity<Shoes> returnFib(@PathVariable int a, @PathVariable int b) {
+        /* 
+        * Optional (below) is a container object which helps determine if a result is present. 
+        * If a value is present, isPresent() will return true
+        * get() will return the value.
+        */
+        int[] fibs= new int[100];
+        fibs[0]=a;
+        fibs[1]=b;
+        for (int i=2;i<100;i++){
+            fibs[i]=fibs[i-1]+fibs[i-2];
+        }
+        return new ResponseEntity<>(fibs, HttpStatus.OK);
     }
 }
